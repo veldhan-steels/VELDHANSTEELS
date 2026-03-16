@@ -50,10 +50,35 @@ input,select{padding:10px;margin:5px;width:90%;}
 <button onclick="send()">Send Enquiry</button>
 
 <script>
-function send(){
-let phone="919994609695";
-let text="New Order Enquiry - Veldhan Steels";
-window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(text));
+function send(){ 
+
+  let grade=document.getElementById("grade").value;
+  let shape=document.getElementById("shape").value;
+  let width=document.getElementById("width").value;
+  let thickness=document.getElementById("thickness").value;
+  let length=document.getElementById("length").value;
+  let qty=document.getElementById("qty").value;
+  let name=document.getElementById("name").value;
+  let company=document.getElementById("company").value;
+  let phone=document.getElementById("phone").value;
+  let location=document.getElementById("location").value;
+
+  let text =
+  "New Order Enquiry - Veldhan Steels\n\n"+
+  "Grade: "+grade+"\n"+
+  "Shape: "+shape+"\n"+
+  "Width/Dia: "+width+"\n"+
+  "Thickness: "+thickness+"\n"+
+  "Cutting Length: "+length+"\n"+
+  "Quantity: "+qty+"\n\n"+
+  "Customer: "+name+"\n"+
+  "Company: "+company+"\n"+
+  "Phone: "+phone+"\n"+
+  "Location: "+location;
+
+  window.open("https://wa.me/919994609695?text="+encodeURIComponent(text));
+
+  }
 }
 </script>
 
