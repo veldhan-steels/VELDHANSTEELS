@@ -78,43 +78,41 @@ margin-top:15px;
 
 <br><br>
 
-<button onclick="send()">Send Enquiry</button>
-
-
+<button type="button" onclick="send()">Send Enquiry</button>
 <script>
 
-function send(){
+  function send(){
 
-let grade = document.getElementById("grade").value;
-let shape = document.getElementById("shape").value;
-let size = document.getElementById("size").value;
-let thickness = document.getElementById("thickness").value;
-let length = document.getElementById("length").value;
-let qty = document.getElementById("qty").value;
-let name = document.getElementById("name").value;
-let company = document.getElementById("company").value;
-let phoneInput = document.getElementById("phone").value;
-let location = document.getElementById("location").value;
+  var grade = document.getElementById("grade").value;
+  var shape = document.getElementById("shape").value;
+  var size = document.getElementById("size").value;
+  var thickness = document.getElementById("thickness").value;
+  var length = document.getElementById("length").value;
+  var qty = document.getElementById("qty").value;
+  var name = document.getElementById("name").value;
+  var company = document.getElementById("company").value;
+  var phoneInput = document.getElementById("phone").value;
+  var location = document.getElementById("location").value;
 
-let phone="919994609695";
+  var message =
+  "New Order Enquiry - Veldhan Steels\n\n"+
+  "Grade: "+grade+"\n"+
+  "Shape: "+shape+"\n"+
+  "Size / Diameter: "+size+"\n"+
+  "Thickness: "+thickness+"\n"+
+  "Cutting Length: "+length+"\n"+
+  "Quantity: "+qty+"\n"+
+  "Customer Name: "+name+"\n"+
+  "Company: "+company+"\n"+
+  "Phone: "+phoneInput+"\n"+
+  "Location: "+location;
 
-let text="New Order Enquiry - Veldhan Steels%0A%0A"
-+"Grade: "+grade+"%0A"
-+"Shape: "+shape+"%0A"
-+"Size / Diameter: "+size+"%0A"
-+"Thickness: "+thickness+"%0A"
-+"Cutting Length: "+length+"%0A"
-+"Quantity: "+qty+"%0A"
-+"Customer Name: "+name+"%0A"
-+"Company: "+company+"%0A"
-+"Phone: "+phoneInput+"%0A"
-+"Location: "+location;
+  var url = "https://wa.me/919994609695?text=" + encodeURIComponent(message);
 
-window.open("https://wa.me/"+phone+"?text="+text);
+  window.location.href = url;
 
-}
+  }
 
-</script>
-
+  </script>
 </body>
 </html>
