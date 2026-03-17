@@ -44,7 +44,7 @@ background:#2196F3;
 color:white;
 }
 
-.sendbtn{
+.confirmbtn{
 background:#25D366;
 color:white;
 }
@@ -52,6 +52,12 @@ color:white;
 .removebtn{
 background:#f44336;
 color:white;
+}
+
+.note{
+font-size:14px;
+color:#ffcc00;
+margin-top:10px;
 }
 
 </style>
@@ -72,11 +78,16 @@ color:white;
 <input id="name" placeholder="Customer Name">
 <input id="company" placeholder="Company Name">
 <input id="phone" placeholder="Phone">
-<input id="location" placeholder="Location">
+<input id="gst" placeholder="GST No.">
+<input id="address" placeholder="Company Address">
 
 <br><br>
 
-<button class="sendbtn" onclick="send()">Send Enquiry</button>
+<button class="confirmbtn" onclick="send()">Confirm Order</button>
+
+<p class="note">
+*Orders confirmed cannot be cancelled. Kindly check the order details before confirming.
+</p>
 
 <script>
 
@@ -109,12 +120,7 @@ div.innerHTML=
 "<option>D3</option>"+
 "</select>"+
 
-"<select id='shape"+itemCount+"'>"+
-"<option>Round</option>"+
-"<option>Flat</option>"+
-"<option>Square</option>"+
-"<option>Hexagon</option>"+
-"</select>"+
+"<select id='shape"+itemCount+"'></select>"+
 
 "<input id='size"+itemCount+"' placeholder='Size'>"+
 "<input id='width"+itemCount+"' placeholder='Width'>"+
@@ -163,8 +169,7 @@ else{
 shape.innerHTML=
 "<option>Round</option>"+
 "<option>Flat</option>"+
-"<option>Square</option>"+
-"<option>Hexagon</option>";
+"<option>Square</option>";
 
 }
 
@@ -204,7 +209,8 @@ message+="Quantity: "+qty+"\n\n";
 message+="Customer Name: "+document.getElementById("name").value+"\n";
 message+="Company: "+document.getElementById("company").value+"\n";
 message+="Phone: "+document.getElementById("phone").value+"\n";
-message+="Location: "+document.getElementById("location").value;
+message+="GST No: "+document.getElementById("gst").value+"\n";
+message+="Company Address: "+document.getElementById("address").value;
 
 let url="https://wa.me/919994609695?text="+encodeURIComponent(message);
 
@@ -218,4 +224,3 @@ addItem();
 
 </body>
 </html>
-
