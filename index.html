@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
 <title>Veldhan Steels</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,107 +14,208 @@ font-family:Arial;
 background:#111;
 color:white;
 text-align:center;
+padding:20px;
+}
+
+.item{
+border:1px solid #444;
+padding:15px;
+margin-bottom:15px;
+border-radius:8px;
 }
 
 input,select{
 padding:10px;
-margin:6px;
-width:90%;
+margin:5px;
+width:95%;
 font-size:16px;
 }
 
 button{
-padding:15px 25px;
-font-size:18px;
-background:#25D366;
+padding:12px 20px;
+font-size:16px;
+margin:5px;
 border:none;
+border-radius:6px;
+}
+
+.addbtn{
+background:#2196F3;
 color:white;
-margin-top:15px;
+}
+
+.sendbtn{
+background:#25D366;
+color:white;
+}
+
+.removebtn{
+background:#f44336;
+color:white;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<h1>Veldhan Steels</h1>
+<h2>Veldhan Steels</h2>
 <p>Bright Steel Bars • EN Series • Alloys</p>
 
-<h2>Order Enquiry</h2>
+<div id="items"></div>
 
-<select id="grade">
-<option>MS Bright</option>
-<option>EN8</option>
-<option>EN19</option>
-<option>EN24</option>
-<option>EN31</option>
-<option>OHNS</option>
-<option>HCHCR</option>
-<option>D2</option>
-<option>D3</option>
-</select>
+<button class="addbtn" onclick="addItem()">Add Another Item</button>
 
-<select id="shape">
-<option>Round</option>
-<option>Flat</option>
-<option>Square</option>
-<option>Hexagon</option>
-</select>
-
-<input id="size" placeholder="Width / Diameter">
-
-<input id="thickness" placeholder="Thickness">
-
-<input id="length" placeholder="Cutting Length">
-
-<input id="qty" placeholder="Quantity">
+<br><br>
 
 <input id="name" placeholder="Customer Name">
-
 <input id="company" placeholder="Company Name">
-
 <input id="phone" placeholder="Phone">
-
 <input id="location" placeholder="Location">
 
 <br><br>
 
-<button type="button" onclick="send()">Send Enquiry</button>
+<button class="sendbtn" onclick="send()">Send Enquiry</button>
+
 <script>
 
-  function send(){
+let itemCount = 0;
 
-  var grade = document.getElementById("grade").value;
-  var shape = document.getElementById("shape").value;
-  var size = document.getElementById("size").value;
-  var thickness = document.getElementById("thickness").value;
-  var length = document.getElementById("length").value;
-  var qty = document.getElementById("qty").value;
-  var name = document.getElementById("name").value;
-  var company = document.getElementById("company").value;
-  var phoneInput = document.getElementById("phone").value;
-  var location = document.getElementById("location").value;
+function addItem(){
 
-  var message =
-  "New Order Enquiry - Veldhan Steels\n\n"+
-  "Grade: "+grade+"\n"+
-  "Shape: "+shape+"\n"+
-  "Size / Diameter: "+size+"\n"+
-  "Thickness: "+thickness+"\n"+
-  "Cutting Length: "+length+"\n"+
-  "Quantity: "+qty+"\n"+
-  "Customer Name: "+name+"\n"+
-  "Company: "+company+"\n"+
-  "Phone: "+phoneInput+"\n"+
-  "Location: "+location;
+itemCount++;
 
-  var url = "https://wa.me/919994609695?text=" + encodeURIComponent(message);
+let container=document.getElementById("items");
 
-  window.location.href = url;
+let div=document.createElement("div");
 
-  }
+div.className="item";
+div.id="item"+itemCount;
 
-  </script>
+div.innerHTML=
+"<h3>Item "+itemCount+"</h3>"+
+
+"<select id='grade"+itemCount+"' onchange='updateShape("+itemCount+")'>"+
+"<option>MS Bright</option>"+
+"<option>EN8</option>"+
+"<option>EN19</option>"+
+"<option>EN24</option>"+
+"<option>EN31</option>"+
+"<option>EN353</option>"+
+"<option>OHNS</option>"+
+"<option>HCHCR</option>"+
+"<option>D2</option>"+
+"<option>D3</option>"+
+"</select>"+
+
+"<select id='shape"+itemCount+"'>"+
+"<option>Round</option>"+
+"<option>Flat</option>"+
+"<option>Square</option>"+
+"<option>Hexagon</option>"+
+"</select>"+
+
+"<input id='size"+itemCount+"' placeholder='Size'>"+
+"<input id='width"+itemCount+"' placeholder='Width'>"+
+"<input id='thickness"+itemCount+"' placeholder='Thickness'>"+
+"<input id='length"+itemCount+"' placeholder='Cutting Length'>"+
+"<input id='qty"+itemCount+"' placeholder='Quantity'>"+
+
+"<button class='removebtn' onclick='removeItem("+itemCount+")'>Remove Item</button>";
+
+container.appendChild(div);
+
+updateShape(itemCount);
+
+}
+
+function removeItem(id){
+
+let el=document.getElementById("item"+id);
+
+if(el){
+el.remove();
+}
+
+}
+
+function updateShape(id){
+
+let grade=document.getElementById("grade"+id).value;
+
+let shape=document.getElementById("shape"+id);
+
+shape.innerHTML="";
+
+if(grade=="MS Bright" || grade=="EN8"){
+
+shape.innerHTML="<option>Hexagon</option>";
+
+}
+else if(grade=="EN19" || grade=="EN24" || grade=="EN353"){
+
+shape.innerHTML="<option>Round</option>";
+
+}
+else{
+
+shape.innerHTML=
+"<option>Round</option>"+
+"<option>Flat</option>"+
+"<option>Square</option>"+
+"<option>Hexagon</option>";
+
+}
+
+}
+
+function send(){
+
+let message="New Order Enquiry - Veldhan Steels\n\n";
+
+for(let i=1;i<=itemCount;i++){
+
+let item=document.getElementById("item"+i);
+
+if(item){
+
+let grade=document.getElementById("grade"+i).value;
+let shape=document.getElementById("shape"+i).value;
+let size=document.getElementById("size"+i).value;
+let width=document.getElementById("width"+i).value;
+let thickness=document.getElementById("thickness"+i).value;
+let length=document.getElementById("length"+i).value;
+let qty=document.getElementById("qty"+i).value;
+
+message+="Item "+i+"\n";
+message+="Grade: "+grade+"\n";
+message+="Shape: "+shape+"\n";
+message+="Size: "+size+"\n";
+message+="Width: "+width+"\n";
+message+="Thickness: "+thickness+"\n";
+message+="Cutting Length: "+length+"\n";
+message+="Quantity: "+qty+"\n\n";
+
+}
+
+}
+
+message+="Customer Name: "+document.getElementById("name").value+"\n";
+message+="Company: "+document.getElementById("company").value+"\n";
+message+="Phone: "+document.getElementById("phone").value+"\n";
+message+="Location: "+document.getElementById("location").value;
+
+let url="https://wa.me/919994609695?text="+encodeURIComponent(message);
+
+window.location.href=url;
+
+}
+
+addItem();
+
+</script>
+
 </body>
 </html>
 
