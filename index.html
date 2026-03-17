@@ -56,7 +56,7 @@ color:white;
 
 .note{
 font-size:14px;
-color:#ffcc00;
+color:red;
 margin-top:10px;
 }
 
@@ -156,7 +156,11 @@ shape.innerHTML="";
 
 if(grade=="MS Bright" || grade=="EN8"){
 
-shape.innerHTML="<option>Hexagon</option>";
+shape.innerHTML=
+"<option>Round</option>"+
+"<option>Flat</option>"+
+"<option>Square</option>"+
+"<option>Hexagon</option>";
 
 }
 else if(grade=="EN19" || grade=="EN24" || grade=="EN353"){
@@ -223,4 +227,5 @@ addItem();
 </script>
 
 </body>
+
 </html>
